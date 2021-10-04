@@ -15,7 +15,9 @@ function render(data) {
     ctx.beginPath();
     ctx.arc(data[i].position.x, data[i].position.y, 10, 0, 2 * Math.PI);
     ctx.stroke();
+    ctx.font = "30px Arial";
+    ctx.strokeText(data[i].number, data[i].position.x, data[i].position.y);
   }
-  
+
 
 }
