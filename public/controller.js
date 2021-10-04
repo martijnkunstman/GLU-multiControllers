@@ -43,5 +43,8 @@ joystick.on("end", function () {
 
 let socket = io.connect();
 socket.on("connect", function () {
-    socket.emit("initController");
+    socket.emit("initController", (response) => {
+        console.log(response.status);
+        document.getElementById("output").innerHTML = response.status;
+    });
 });

@@ -8,7 +8,7 @@ const socket = require('socket.io')
 const io = socket(server)
 
 let gameData = [];
-let speed = 50;
+let speed = 0;
 
 io.on('connection', newConnection)
 
@@ -18,9 +18,12 @@ function newConnection(socket) {
       gameData = gameData.filter(el => (-1 == listToDelete.indexOf(el.id)))
    });
 
-   socket.on('initController', function () {
+   socket.on('initController', (callback) => {
       let number = getNumber();
       gameData.push({ "number": number, "id": socket.id, "joystick": { x: 0, y: 0 }, "position": { x: 0, y: 0 }, "velocity": { x: 0, y: 0 } });
+      callback({
+         status: number
+       });
    });
 
    socket.on('joystick', function (joystick) {
